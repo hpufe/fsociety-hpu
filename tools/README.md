@@ -8,4 +8,4 @@ jTessBoxEditor is released and distributed under the Apache License, v2.0.
 
 [Learn more](http://vietocr.sourceforge.net/training.html)
 
-[installation](https://sourceforge.net/projects/vietocr/files/jTessBoxEditor/)
+[Installation](https://sourceforge.net/projects/vietocr/files/jTessBoxEditor/)
