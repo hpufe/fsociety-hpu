@@ -1,0 +1,24 @@
+{
+  "name": "fsociety-hpu",
+  "version": "1.0.0",
+  "description": "Fsociety HPU",
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "fsociety-hpu": "src/bin/fh",
+    "fh": "src/bin/fh"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jeneser",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "superagent": "^3.6.0",
+    "superagent-charset": "^1.2.0",
+    "tesseract.js": "^1.0.10"
+  }
+}

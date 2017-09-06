@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var pjson = require('../../package.json');
+var index = require('../index.js');
+var program = require('commander');
+
+program
+  .version(pjson.version)
+  .description(pjson.description)
+  .option('-n, --noVpn <noVpn>', 'No vpn.')
+  .parse(process.argv);
+
+index.run(program).catch(error => process.exit(1));
