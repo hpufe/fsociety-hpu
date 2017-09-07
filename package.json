@@ -7,11 +7,13 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "fh": "node src/index.js"
+    "fh": "node src/index.js",
+    "citt": "node tools/convertImgToTif.js"
   },
   "author": "jeneser",
   "license": "MIT",
   "dependencies": {
+    "denodeify": "^1.2.1",
     "gm": "^1.23.0",
     "node-tesseract": "^0.2.7",
     "superagent": "^3.6.0",
