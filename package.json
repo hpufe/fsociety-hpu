@@ -12,6 +12,8 @@
   "author": "jeneser",
   "license": "MIT",
   "dependencies": {
+    "gm": "^1.23.0",
+    "node-tesseract": "^0.2.7",
     "superagent": "^3.6.0",
     "superagent-charset": "^1.2.0"
   }
