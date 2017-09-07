@@ -40,14 +40,4 @@
 //   return Promise.resolve();
 // };
 
-var Tesseract = require('tesseract.js'),
-image = require('path').resolve(__dirname, 't1.png');
-
-Tesseract.recognize(image)
-  .progress(function (p) {
-    console.log('progress', p)
-  })
-  .then(function (result) {
-    console.log(result)
-  })
-  .catch(err => console.error(err))
+console.log("test it!");

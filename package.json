@@ -5,20 +5,14 @@
   "files": [
     "src"
   ],
-  "bin": {
-    "fsociety-hpu": "src/bin/fh",
-    "fh": "src/bin/fh"
-  },
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fh": "node src/index.js"
   },
   "author": "jeneser",
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.11.0",
     "superagent": "^3.6.0",
-    "superagent-charset": "^1.2.0",
-    "tesseract.js": "^1.0.10"
+    "superagent-charset": "^1.2.0"
   }
 }
