@@ -2,6 +2,7 @@ var denodeify = require('denodeify');
 var path = require('path');
 var fs = require('fs');
 var gm = require('gm');
+var ora = require('ora' );
 
 var readdir = denodeify(fs.readdir);
 
@@ -13,6 +14,8 @@ var config = {
   contrast: -100
 }
 
+var spinner = ora('Start conversion...').start();
+
 // Convert it
 readdir(path.join(__dirname, config.src))
   .catch(err => {
@@ -21,7 +24,7 @@ readdir(path.join(__dirname, config.src))
   .then(files => {
     var l = files.length;
 
-    for (let i = 0; i < l; i++) {
+    for (i = 0; i < l; i++) {
       // Reduces the speckles within the image.
       // Reduces the image contrast
       // Convert images to .tif
@@ -40,6 +43,10 @@ readdir(path.join(__dirname, config.src))
             }
           }
         );
+
+      if(i === l - 1) {
+        spinner.succeed('Successful conversion! Let the bullets fly for a while...')
+      }
     }
   })
   .catch(err => {
