@@ -31,6 +31,7 @@ readdir(path.join(__dirname, config.src))
       gm(path.join(__dirname, config.src, files[i]))
         .despeckle()
         .contrast(config.contrast)
+        .resize(240, 80)
         .write(
           path.join(
             __dirname,
