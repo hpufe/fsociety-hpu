@@ -9,6 +9,7 @@
   "scripts": {
     "fh": "node src/index.js",
     "citt": "node tools/convert-img-to-tif.js",
+    "oj": "java -jar tools/jTessBoxEditor/jTessBoxEditor.jar",
     "mb": "node tools/make-box.js"
   },
   "author": "jeneser",
