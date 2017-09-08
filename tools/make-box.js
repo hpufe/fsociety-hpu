@@ -8,32 +8,50 @@ var exec = denodeify(require('child_process').exec, (err, stdout, stderr) => {
   return [err, stdout];
 });
 
-const c_make_box =
+// Config
+var config = {
+  src: path.join(__dirname, '../training/samples-output/'),
+  dist: path.join(__dirname, '../training/training-it/'),
+  name: 'hpu.font.exp0'
+};
+
+// Commanders
+var c_make_box =
   'tesseract ' +
-  path.join(__dirname, '../training/samples-output/hpu.font.exp0.tif') +
+  config.src +
+  config.name +
+  '.tif' +
   ' ' +
-  path.join(__dirname, '../training/samples-output/hpu.font.exp0') +
+  config.src +
+  config.name +
   ' batch.nochop makebox';
 
-const c_mv_tif =
+var c_mv_tif =
   'mv ' +
-  path.join(__dirname, '../training/samples-output/hpu.font.exp0.tif') +
+  config.src +
+  config.name +
+  '.tif' +
   ' ' +
-  path.join(__dirname, '../training/training-it/hpu.font.exp0.tif');
+  config.dist +
+  config.name +
+  '.tif';
 
-const c_mv_box =
+var c_mv_box =
   'mv ' +
-  path.join(__dirname, '../training/samples-output/hpu.font.exp0.box') +
+  config.src +
+  config.name +
+  '.box' +
   ' ' +
-  path.join(__dirname, '../training/training-it/hpu.font.exp0.box');
+  config.dist +
+  config.name +
+  '.box';
 
+var spinner = ora('Start making box...').start();
+
+// Making box
 exec(c_make_box)
-  .then(() =>
-    access(
-      path.join(__dirname, '../training/samples-output/hpu.font.exp0.box'),
-      fs.constants.F_OK
-    )
-  )
+  .then(() => access(config.src + config.name + '.box', fs.constants.F_OK))
   .then(() => exec(c_mv_tif))
   .then(() => exec(c_mv_box))
+  .then(() => spinner.succeed('Making box successfully!'))
   .catch(err => console.log(err));
