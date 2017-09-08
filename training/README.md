@@ -1,11 +1,17 @@
 ## Tesseract for Training
 
-Convert `jpeg` to `tif`.
+Tesseract for Training.
+
+Quick start:
+
 ```
-convert '*.jpeg' /home/jeneser/workSpace/fsociety-hpu/training/samples-output/img-%d.tif
+cd path/to/fsociety-hpu/training/training-it/
+
+sh training-it.sh
 ```
 
-Tesseract for Training
+You can run these commands manually.
+
 ```
 # Run Tesseract for Training
 tesseract hpu.font.exp0.tif hpu.font.exp0 box.train
@@ -30,3 +36,5 @@ combine_tessdata hpu.
 
 # ok!
 ```
+
+[Learn more](https://github.com/tesseract-ocr/tesseract/wiki/Training-Tesseract#run-tesseract-for-training)
