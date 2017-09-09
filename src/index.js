@@ -1,4 +1,6 @@
 var config = require('./config');
+var ocr = require('./ocr');
+var path = require('path');
 var cheerio = require('cheerio');
 var request = require('superagent');
 require('superagent-charset')(request);
@@ -20,7 +22,32 @@ agent
     svpn_password: config.vpnPassword
   })
   .redirects()
+  // Get urp index
   .then(() => {
-    return agent.get(config.urpIndex).charset('gbk');
+    return agent.get('https://vpn.hpu.edu.cn/web/0/http/1/218.196.240.97/validateCodeAction.do?random=0.5239535101287284');
   })
-  .then(data => console.log(data.text));
+  // .then(() => {
+  //   return agent
+  //     .post(config.urpLoginUrl)
+  //     .set(config.urpLoginHeader)
+  //     .type('form')
+  //     .send({
+  //       zjh1: '',
+  //       tips: '',
+  //       lx: '',
+  //       evalue: '',
+  //       eflag: '',
+  //       fs: '',
+  //       dzslh: ''
+  //     })
+  //     .send({
+  //       zjh: ,
+  //       mm: ,
+  //       v_yzm
+  //     })
+  //     .redirects()
+  // })
+  .then(data => {
+    console.log('res:' + ocr(data.body));
+  });
+
