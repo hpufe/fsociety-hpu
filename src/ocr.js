@@ -18,44 +18,38 @@ var options = {
   binary: 'tesseract'
 };
 
-var res = '';
-
 function ocr(verCode) {
-  // Process pictures
-  // Reduces the speckles within the image.
-  // Reduces the image contrast
-  // Resize the pictures
-  gm(verCode)
-    .despeckle()
-    .contrast(config.contrast)
-    .resize(config.resize.w, config.resize.h)
-    .write(config.dist, err => {
-      if (err) {
-        console.log(err);
-      } else {
-        // Tesseract-ocr
-        // Recognize verification code
-        tesseract.process(config.dist, options, (err, data) => {
-          if (err) {
-            console.error(err);
-          } else {
-            var ver = new RegExp('^[a-zA-Z0-9]{4}$');
-            if (ver.test(data.trim())) {
-              res = data;
-              console.log('ori:' + data);
+  return new Promise((resolve, reject) => {
+    // Process pictures
+    // Reduces the speckles within the image.
+    // Reduces the image contrast
+    // Resize the pictures
+    gm(verCode)
+      .despeckle()
+      .contrast(config.contrast)
+      .resize(config.resize.w, config.resize.h)
+      .write(config.dist, err => {
+        if (err) {
+          reject(err);
+        } else {
+          // Tesseract-ocr
+          // Recognize verification code
+          tesseract.process(config.dist, options, (err, data) => {
+            if (err) {
+              reject(err);
             } else {
-              console.log('Unrecognized!');
+              var ver = new RegExp('^[a-zA-Z0-9]{4}$');
+              if (ver.test(data.trim())) {
+                // console.log('ori:' + data);
+                resolve(data.trim());
+              } else {
+                reject('Unrecognized!');
+              }
             }
-          }
-        });
-      }
-    });
-
-  // TODO: Need refactoring
-  // Make bullets faster
-  setTimeout(() => {
-    console.log(res);
-  }, 100);
+          });
+        }
+      });
+  });
 }
 
 module.exports = ocr;

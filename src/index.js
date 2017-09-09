@@ -22,32 +22,34 @@ agent
     svpn_password: config.vpnPassword
   })
   .redirects()
-  // Get urp index
+  // Recognize URP verification code
   .then(() => {
-    return agent.get('https://vpn.hpu.edu.cn/web/0/http/1/218.196.240.97/validateCodeAction.do?random=0.5239535101287284');
+    return agent.get(config.urpVerCode);
   })
-  // .then(() => {
-  //   return agent
-  //     .post(config.urpLoginUrl)
-  //     .set(config.urpLoginHeader)
-  //     .type('form')
-  //     .send({
-  //       zjh1: '',
-  //       tips: '',
-  //       lx: '',
-  //       evalue: '',
-  //       eflag: '',
-  //       fs: '',
-  //       dzslh: ''
-  //     })
-  //     .send({
-  //       zjh: ,
-  //       mm: ,
-  //       v_yzm
-  //     })
-  //     .redirects()
-  // })
   .then(data => {
-    console.log('res:' + ocr(data.body));
-  });
-
+    return ocr(data.body);
+  })
+  // Login URP
+  .then(res => {
+    return agent1
+      .post(config.urpLoginUrl)
+      .set(config.urpLoginHeader)
+      .type('form')
+      .send({
+        zjh1: '',
+        tips: '',
+        lx: '',
+        evalue: '',
+        eflag: '',
+        fs: '',
+        dzslh: ''
+      })
+      .send({
+        zjh: '3',
+        mm: '3',
+        v_yzm: res
+      })
+      .redirects();
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
