@@ -1,29 +1,26 @@
-var path = require('path');
-var fs = require('fs');
-var gm = require('gm');
-var tesseract = require('node-tesseract');
+var config = require('./config');
+var cheerio = require('cheerio');
+var request = require('superagent');
+require('superagent-charset')(request);
 
-var options = {
-  l: 'hpu',
-  psm: 7,
-  binary: 'tesseract'
-};
+const agent = request.agent();
 
-// gm
-gm(path.join(__dirname, '../training/samples/10.jpeg'))
-  .despeckle()
-  .contrast(-100)
-  .write(path.join(__dirname, 'gm.jpeg'), err => {
-    if (err) {
-      console.log(err);
-    }
-  });
+// Disable https
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-// tesseract
-tesseract.process(path.join(__dirname, 'gm.jpeg'), options, (err, data) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log('The output:' + data.trim());
-  }
-});
+// Login vpn
+agent
+  .post(config.vpnLoginUrl)
+  .set(config.vpnLoginHeader)
+  .type('form')
+  .send({
+    svpn_name: config.vpnUser
+  })
+  .send({
+    svpn_password: config.vpnPassword
+  })
+  .redirects()
+  .then(() => {
+    return agent.get(config.urpIndex).charset('gbk');
+  })
+  .then(data => console.log(data.text));
