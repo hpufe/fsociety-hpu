@@ -40,7 +40,7 @@ function ocr(verCode) {
             } else {
               var ver = new RegExp('^[a-zA-Z0-9]{4}$');
               if (ver.test(data.trim())) {
-                // console.log('ori:' + data);
+                console.log('ori:' + data);
                 resolve(data.trim());
               } else {
                 reject('Unrecognized!');

@@ -14,7 +14,7 @@ var vpnPassword = rsa.encrypt('211219');
 var config = {
   // VPN
   vpnLoginUrl:
-  'https://vpn.hpu.edu.cn/por/login_psw.csp?sfrnd=2346912324982305&encrypt=1',
+    'https://vpn.hpu.edu.cn/por/login_psw.csp?sfrnd=2346912324982305&encrypt=1',
 
   vpnLoginInfo: 'svpn_name=' + vpnUser + '&svpn_password=' + vpnPassword,
   vpnUser: vpnUser,
@@ -31,26 +31,35 @@ var config = {
     Connection: 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
     'Cache-Control': 'max-age=0',
-    Referer: 'https://vpn.hpu.edu.cn/por/login_psw.csp?rnd=0.4288785251262913#http%3A%2F%2Fvpn.hpu.edu.cn%2F',
-    Cookie: 'language=en_US; TWFID=1683ff4c80034a2e; collection=%7Bauto_login_count%3A0%7D; VpnLine=http%3A%2F%2Fvpn.hpu.edu.cn%2F; g_LoginPage=login_psw; VisitTimes=0; haveLogin=0'
+    Referer:
+      'https://vpn.hpu.edu.cn/por/login_psw.csp?rnd=0.4288785251262913#http%3A%2F%2Fvpn.hpu.edu.cn%2F',
+    Cookie:
+      'language=en_US; TWFID=1683ff4c80034a2e; collection=%7Bauto_login_count%3A0%7D; VpnLine=http%3A%2F%2Fvpn.hpu.edu.cn%2F; g_LoginPage=login_psw; VisitTimes=0; haveLogin=0'
   },
 
   // URP
   // urpIndex: 'https://vpn.hpu.edu.cn/web/1/http/0/218.196.240.97/',
 
-  urpLoginUrl: 'https://vpn.hpu.edu.cn/web/1/http/1/218.196.240.97/loginAction.do',
-  urpVerCode: 'https://vpn.hpu.edu.cn/web/0/http/1/218.196.240.97/validateCodeAction.do?random=0.5239535101287284',
-  
-  urpStudentInfoUrl: 'https://vpn.hpu.edu.cn/web/1/http/1/218.196.240.97/xjInfoAction.do?oper=xjxx',
+  urpLoginUrl:
+    'https://vpn.hpu.edu.cn/web/1/http/1/218.196.240.97/loginAction.do',
+  urpVerCode:
+    'https://vpn.hpu.edu.cn/web/0/http/1/218.196.240.97/validateCodeAction.do?random=0.5239535101287284',
+
+  // URP login info
+  urpUser: '311509040120',
+  urpPassword: '311509040120',
+
+  urpStudentInfoUrl:
+    'https://vpn.hpu.edu.cn/web/1/http/1/218.196.240.97/xjInfoAction.do?oper=xjxx',
 
   urpLoginHeader: {
     Host: 'vpn.hpu.edu.cn',
-    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0',
+    'User-Agent':
+      'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0',
     Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     'Accept-Encoding': 'gzip, deflate, br',
     Referer: 'https://vpn.hpu.edu.cn/web/1/http/0/218.196.240.97/',
-    Cookie: 'language=en_US; TWFID=6188186f64001a51; collection=%7Bpage_state%3A%27started%27%2Cneed_ist_cscm%3A%27-1%27%2CscacheUseable%3A0%2CAppCount%3A0%7D; VpnLine=http%3A%2F%2Fvpn.hpu.edu.cn%2F; g_LoginPage=login_psw; VisitTimes=0; haveLogin=1; ENABLE_RANDCODE=0; webonly=1; allowlogin=1; LoginMode=2; websvr_cookie=1504940535506888',
     Connection: 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
     'Cache-Control': 'max-age=0'

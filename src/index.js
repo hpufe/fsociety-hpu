@@ -31,7 +31,7 @@ agent
   })
   // Login URP
   .then(res => {
-    return agent1
+    return agent
       .post(config.urpLoginUrl)
       .set(config.urpLoginHeader)
       .type('form')
@@ -45,11 +45,14 @@ agent
         dzslh: ''
       })
       .send({
-        zjh: '3',
-        mm: '3',
+        zjh: config.urpUser,
+        mm: config.urpPassword,
         v_yzm: res
       })
       .redirects();
+  })
+  .then(() => {
+    return agent.get(config.urpStudentInfoUrl).charset('gbk');
   })
   .then(data => console.log(data))
   .catch(err => console.log(err));
